@@ -1,0 +1,17 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: li $s0, 12          # Load a 12 into $s0
+0a01000c 
+
+# 0x0004: li $t0, 3						# Load a 3 into $s4
+06010003 
+
+# 0x0008: sub $s1, $s0, $t0  # Store $s0 + $s0 into $s1
+1ba06000 
+
+# 0x000c: sub $s2, $s1, $t0  # Store $s1 + $s1 into $s2
+1cb06000 
+
+# 0x0010: sub $s3, $s2, $t0  # Store $s2 + $s2 into $s3
+1dc06000 

@@ -1,0 +1,65 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: li $t0, 11 # load immediate value of 11 into t0
+0601000b 
+
+# 0x0004: li $t1, 7 # load immediate value of 7 into t1
+07010007 
+
+# 0x0008: add $t2, $t0, $t1 # $t2 stores the sum of t0 and t1, which is 18
+08607000 
+
+# 0x000c: addi $t3, $t2, 1 # $t3 stores incremented t2, which is 19
+09810001 
+
+# 0x0010: sub $t2, $t2, $t3 # $t2 stores t2-t3 which is 18-19 = -1
+18809000 
+
+# 0x0014: subi $t3, $t2, 6 # $t3 stores t2-6 which is -1-6 = -7
+19810006 
+
+# 0x0018: and $s0, $t0, $t1 # $s0 is 1011 & 0111 which gives 0011 (3 in decimal)
+2a607000 
+
+# 0x001c: andi $s1, $t0, 4 # $s1 is 1011 & 0100 which should give 0000
+2b610004 
+
+# 0x0020: or $s0, $t0, $t1 # $s0 is 1011 | 0111 which gives 1111 (15 in decimal)
+3a607000 
+
+# 0x0024: ori $s1, $t0, 3 # $s1 is 1011 | 0011 which gives 1011 (11 in decimal)
+3b610003 
+
+# 0x0028: nop # no operation, does no useful work at all.
+06010000 
+
+# 0x002c: nand $s2, $t0, $t1 # $s2 stores 1011 nand 0111 which gives 0xfffc (-4 in dec)
+4c607000 
+
+# 0x0030: nandi $s3, $t0, 2 # $s3 stores 1011 nandi 0010 which gives 0xfffd (-3 in dec)
+4d610002 
+
+# 0x0034: nor $s2, $t0, $t1 # $s2 stores 1011 nor 0111 which gives 0xfff0 (-16_dec)
+5c607000 
+
+# 0x0038: nori $s3, $t0, 10 # $s3 stores 1011 nori 1010 which gives 0xfff4 (-12_dec)
+5d61000a 
+
+# 0x003c: xor $s0, $t0, $t1 # $s0 stores 1011 xor 0111 which gives 0x000c (12_dec)
+6a607000 
+
+# 0x0040: xori $s1, $t0, 13 # $s1 stores 1011 xori 1101 which gives 0x0006 (6_dec)
+6b61000d 
+
+# 0x0044: slt $s0, $t2, $t3 # $s0 stores slt(-1, -7) which gives 0
+7a809000 
+
+# 0x0048: slti $s1, $t2, 1 # $s1 stores slt(-1, 1) which gives 1
+7b810001 
+
+# 0x004c: sltu $s0, $s1, $t2 # $s0 stores sltu(1, ffff) which gives 1
+8ab08000 
+
+# 0x0050: sltiu $s1, $t2, 7 # $s1 stores sltu(ffff, 7) which gives 0
+8b810007 

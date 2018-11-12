@@ -1,0 +1,14 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: subi $t0, $zero, 6  # Load -6 into $t0
+16010006 
+
+# 0x0004: subi $t1, $t0, 1    # Set $t1 to $t0+1
+17610001 
+
+# 0x0008: subi $t2, $t1, 1    # Set $t2 to $t1+1
+18710001 
+
+# 0x000c: subi $t3, $t2, 1    # Set $t3 to $t2+1
+19810001 
