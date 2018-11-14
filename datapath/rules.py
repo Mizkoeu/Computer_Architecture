@@ -17,7 +17,7 @@ def addi(dest, op1, immediate):
 # Encode nop instruction
 @assembler.instruction('nop', 1)
 def nop():
-  return addi('$t0', '$zero', 0)
+  return add_instr('$zero', '$zero', '$zero')
 
 # Encode the li pseudoinstruction using an addition to zero
 @assembler.instruction('li #, #', 1)

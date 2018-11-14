@@ -1,0 +1,41 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: nop
+00000000 
+
+# 0x0004: li $ra, 28 # initially set up $ra to be 28, which is the addr of loop section
+0f01001c 
+
+# 0x0008: li $t0, 2 # load immediate value of 2 into t0
+06010002 
+
+# 0x000c: li $t1, 7 # load immediate value of 7 into t1
+07010007 
+
+# 0x0010: jr $ra    # the first time it'll jump to loop section, but
+f000f000 
+
+# 0x0014: nop
+00000000 
+
+# 0x0018: nop
+00000000 
+
+# 0x001c: add $t1, $t0, $t1 # store sum of t0 and t1, which is 9, into t1.
+07607000 
+
+# 0x0020: jal jump_to_here # jump and link to jump_to_here (writes addr of next)
+ff030008 
+
+# 0x0024: nop
+00000000 
+
+# 0x0028: addi $t1, $t1, 1 # increment $t1 by 1
+07710001 
+
+# 0x002c: j loop    # jumps back to the loop section again
+f001001c 
+
+# 0x0030: nop
+00000000 

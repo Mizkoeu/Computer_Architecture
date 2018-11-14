@@ -1,0 +1,32 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: nop
+00000000 
+
+# 0x0004: li $t0, 5 						# load 5 into t0
+06010005 
+
+# 0x0008: li $t1, 7							# load 7 into t1
+07010007 
+
+# 0x000c: bne $t0, $t1, to_here # testing bne instruction, which should branch
+e6710024 
+
+# 0x0010: nop										# add a bunch of nops after bne
+00000000 
+
+# 0x0014: nop
+00000000 
+
+# 0x0018: nop
+00000000 
+
+# 0x001c: nop
+00000000 
+
+# 0x0020: li $s0, 1234 # this line should never execute since we should've branched.
+0a0104d2 
+
+# 0x0024: add $s0, $t0, $t1 # this line should execute and assign 12 to s0 register.
+0a607000 
