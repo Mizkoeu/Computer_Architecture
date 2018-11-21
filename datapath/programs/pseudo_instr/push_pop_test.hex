@@ -1,0 +1,26 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: nop
+00000000 
+
+# 0x0004: li $t0, 5
+06010005 
+
+# 0x0008: li $t1, 10
+0701000a 
+
+# 0x000c: push $t0
+0ee1fffe c6e10000 
+
+# 0x0014: push $t1
+0ee1fffe c7e10000 
+
+# 0x001c: pop $s1
+abe10000 0ee10002 
+
+# 0x0024: pop $s2
+ace10000 0ee10002 
+
+# 0x002c: pop $s3 # intentionally breaking program
+ade10000 0ee10002 

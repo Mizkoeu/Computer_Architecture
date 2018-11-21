@@ -1,0 +1,35 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: nop
+00000000 
+
+# 0x0004: li $t0, 3
+06010003 
+
+# 0x0008: li $t1, 6
+07010006 
+
+# 0x000c: li $t2, 3
+08010003 
+
+# 0x0010: bgt! $t1, $t0, somewhere
+77607000 e7010020 
+
+# 0x0018: li $s0, 3
+0a010003 
+
+# 0x001c: j branch_test
+f0010000 
+
+# 0x0020: li $s0, 10
+0a01000a 
+
+# 0x0024: bge! $t0, $t2, else
+76608000 d6010030 
+
+# 0x002c: li $s0, 3
+0a010003 
+
+# 0x0030: li $s0, 11
+0a01000b 

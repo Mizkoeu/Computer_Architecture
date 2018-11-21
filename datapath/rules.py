@@ -147,3 +147,55 @@ def store_word(read, offset, addr):
 def store_byte(read, offset, addr):
   return pips.iformat(opcode='sb', r0=read, r1=addr, imm=offset)
 
+# Encode sll instruction
+@assembler.instruction('sll #, #, #', 1)
+def sll(dest, shift_reg, shift):
+    return pips.rformat(opcode='add', r0=dest, r1='$zero', r2=shift_reg, shift_type=pips.SHIFT_LEFT, shift_amt=shift)
+
+# Encode srl instruction
+@assembler.instruction('srl #, #, #', 1)
+def srl(dest, shift_reg, shift):
+    return pips.rformat(opcode='add', r0=dest, r1='$zero', r2=shift_reg,
+            shift_type=pips.SHIFT_RIGHT_LOGICAL, shift_amt=shift)
+
+# Encode sra instruction
+@assembler.instruction('sra #, #, #', 1)
+def sra(dest, shift_reg, shift):
+    return pips.rformat(opcode='add', r0=dest, r1='$zero', r2=shift_reg,
+            shift_type=pips.SHIFT_RIGHT_ARITHMETIC, shift_amt=shift)
+
+# Encode not pseudoinstruction
+@assembler.instruction('not #, #', 1)
+def not_instr(destination, src):
+    return xori(dest = destination, op1 = src, immediate = '-1')
+
+# push and pop
+@assembler.instruction('push #', 2) # <- notice the 2 here. This tells the assembler that we will emit two instructions for this rule
+def push_instr(reg):
+  return addi('$sp', '$sp', '-2') + store_word(reg, 0, '$sp')
+
+# pop
+@assembler.instruction('pop #', 2) # <- notice the 2 here. This tells the assembler that we will emit two instructions for this rule
+def pop_instr(reg):
+  return load_word(reg, 0, '$sp') + addi('$sp', '$sp', '2')
+
+# blt branch less than
+@assembler.instruction('blt! #, #, #', 2)
+def blt_instr(op1, op2, label):
+  return slt(op1, op1, op2) + bne(op1, '$zero', label)
+
+# ble branch less than or equal
+@assembler.instruction('ble! #, #, #', 2)
+def ble_instr(op1, op2, label):
+  return slt(op1, op2, op1) + beq(op1, '$zero', label)
+
+# bgt branch greater than
+@assembler.instruction('bgt! #, #, #', 2)
+def bgt_instr(op1, op2, label):
+  return slt(op1, op2, op1) + bne(op1, '$zero', label)
+
+# bge branch greater than or equal
+@assembler.instruction('bge! #, #, #', 2)
+def bge_instr(op1, op2, label):
+  return slt(op1, op1, op2) + beq(op1, '$zero', label)
+
