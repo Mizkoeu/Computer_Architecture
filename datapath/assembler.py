@@ -43,7 +43,7 @@ def load(contents):
     if const_match:
       name, value_str = const_match.groups()
       try:
-        value = int(value_str, 0)
+        value = immediate(value_str, 16)
         constants[name] = value
       except ValueError:
         raise SyntaxError('Invalid constant value "{}"'.format(value_str))
@@ -126,10 +126,10 @@ def generate_regex(fmt):
       # Is this pattern at the end of the input?
       if i == len(fmt) - 1:
         # Yes. Match anything that isn't whitespace
-        regex += '([^\s]+)'
+        regex += '([^\s]+|\' \')'
       else:
         # No. Match anything except the following character or whitespace
-        regex += '([^\s{}]+)'.format(fmt[i+1])
+        regex += '([^\s{}]+|\' \')'.format(fmt[i+1])
     
     else:
       # Match exactly the character specified in the format
@@ -158,15 +158,27 @@ def immediate(value, bits):
   
   # If the input is a string, convert as decimal or hex
   if isinstance(value, str):
-    try:
-      if value.startswith('0x'):
-        # Try to convert as a hexadecimal value
-        value = int(value[2:], 16)
-      else:
-        # Try to convert as a decimal value
-        value = int(value)
-    except ValueError:
-      raise SyntaxError('Unrecognized immediate value: {}'.format(value))
+    # Is this a character in single quotes?
+    if value[0] == '\'' and value[-1] == '\'':
+      # Looks like it. Decode it to process escaped characters.
+      decoded = bytes(value[1:-1], 'utf-8').decode('unicode-escape')
+      
+      if len(decoded) != 1:
+        raise SyntaxError('Unrecognized immediate value: {}'.format(value))
+        
+      value = ord(decoded)
+      
+    else:
+      # Doesn't look like a character. Treat it as a string holding a number
+      try:
+        if value.startswith('0x'):
+          # Try to convert as a hexadecimal value
+          value = int(value[2:], 16)
+        else:
+          # Try to convert as a decimal value
+          value = int(value)
+      except ValueError:
+        raise SyntaxError('Unrecognized immediate value: {}'.format(value))
   
   # Make sure we have an integer now
   if not isinstance(value, int):

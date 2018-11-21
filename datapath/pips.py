@@ -36,6 +36,12 @@ def iformat(opcode, r0, r1, imm, link=False):
          '00' + assembler.bits(link, 1) + '1' + \
          assembler.bits(assembler.immediate(imm, 16), 16)
 
+# Constants for shift types
+SHIFT_NONE = 0
+SHIFT_LEFT = 1
+SHIFT_RIGHT_LOGICAL = 2
+SHIFT_RIGHT_ARITHMETIC = 3
+
 # Register Format
 #   | opcode | r0    | r1    | unused | link | 0 | r2    | shift type | unused | shift amt. |
 #     31-28    27-24   23-20   19-18    17     16  15-12   11-10        9-4      3-0
@@ -64,7 +70,7 @@ def iformat(opcode, r0, r1, imm, link=False):
 #
 # @param shift amt.  How many bits should the value in r2 be shifted? Pass in an integer value
 #                    between 0 and 31 (inclusive).
-def rformat(opcode, r0, r1, r2, link=False, shift_type=0, shift_amt=0):
+def rformat(opcode, r0, r1, r2, link=False, shift_type=SHIFT_NONE, shift_amt=0):
   return assembler.bits(encode_op(opcode), 4) + \
          assembler.bits(encode_reg(r0), 4) + \
          assembler.bits(encode_reg(r1), 4) + \
