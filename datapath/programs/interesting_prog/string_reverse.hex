@@ -1,0 +1,62 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: nop
+00000000 
+
+# 0x0004: li $s0, TERM
+0a01ff10 
+
+# 0x0008: li $s1, KB
+0b01ff20 
+
+# 0x000c: li $sp, STACK_TOP
+0e01f800 
+
+# 0x0010: lw $t0, 0($s1)
+a6b10000 
+
+# 0x0014: beq $t0, $zero, loop_top
+d6010010 
+
+# 0x0018: addi $sp, $sp, -4
+0ee1fffc 
+
+# 0x001c: sw $t0, 0($s0)
+c6a10000 
+
+# 0x0020: li $t1, '\n'
+0701000a 
+
+# 0x0024: beq $t0, $t1, print_reverse
+d6710030 
+
+# 0x0028: sw $t0, 0($sp)
+c6e10000 
+
+# 0x002c: j loop_top
+f0010010 
+
+# 0x0030: lw $t2, 0($sp)
+a8e10000 
+
+# 0x0034: sw $t2, 0($s0)
+c8a10000 
+
+# 0x0038: addi $sp, $sp, 4
+0ee10004 
+
+# 0x003c: li $t3, STACK_TOP
+0901f800 
+
+# 0x0040: beq $t3, $sp, end
+d9e10048 
+
+# 0x0044: j print_reverse
+f0010030 
+
+# 0x0048: li $s0, HALT
+0a01ff00 
+
+# 0x004c: jr $s0
+f000a000 
