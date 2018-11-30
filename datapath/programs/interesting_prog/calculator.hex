@@ -1,0 +1,236 @@
+v2.0 raw
+# This is an automatically-generated PIPS machine code file
+
+# 0x0000: nop # first instr not execute
+00000000 
+
+# 0x0004: li $s0, TERMINAL
+0a01ff10 
+
+# 0x0008: li $sp, STACK_TOP
+0e01f800 
+
+# 0x000c: li $s1, KB
+0b01ff20 
+
+# 0x0010: li $s2, '\n'
+0c01000a 
+
+# 0x0014: li $s3, 43     # load '+' operator for comparison
+0d01002b 
+
+# 0x0018: lw $t0, 0($s1)
+a6b10000 
+
+# 0x001c: beq $t0, $zero, loop_top
+d601000c 
+
+# 0x0020: sw $t0, 0($s0)
+c6a10000 
+
+# 0x0024: beq $t0, $s3, loop_top
+d6d1000c 
+
+# 0x0028: beq $t0, $s2, compute_sum
+d6c1003c 
+
+# 0x002c: addi $sp, $sp, -4
+0ee1fffc 
+
+# 0x0030: addi $t0, $t0, -48 # compute the number
+0661ffd0 
+
+# 0x0034: sw $t0, 0($sp)
+c6e10000 
+
+# 0x0038: j loop_top
+f001000c 
+
+# 0x003c: li $t3, STACK_TOP
+0901f800 
+
+# 0x0040: beq $t3, $sp, end
+d9e1005c 
+
+# 0x0044: lw $t2, 0($sp)
+a8e10000 
+
+# 0x0048: addi $sp, $sp, 4
+0ee10004 
+
+# 0x004c: lw $t1, 0($sp)
+a7e10000 
+
+# 0x0050: add $a1, $t1, $t2
+03708000 
+
+# 0x0054: jal print_number
+ff030060 
+
+# 0x0058: j loop_top
+f001000c 
+
+# 0x005c: j HALT
+f001ff00 
+
+# 0x0060: bne $a0, $zero, else
+e2010078 
+
+# 0x0064: nop
+00000000 
+
+# 0x0068: li $t0, 0x30
+06010030 
+
+# 0x006c: sb $t0, 0($s0)
+b6a10000 
+
+# 0x0070: j print_return #jump to return from print_num func
+f00100d8 
+
+# 0x0074: nop
+00000000 
+
+# 0x0078: addi $sp, $sp, -12
+0ee1fff4 
+
+# 0x007c: sw $ra, 0($sp)
+cfe10000 
+
+# 0x0080: sw $a0, 4($sp)
+c2e10004 
+
+# 0x0084: li $a1, 10
+0301000a 
+
+# 0x0088: jal remainder
+ff0300e0 
+
+# 0x008c: nop
+00000000 
+
+# 0x0090: addi $s1, $v0, 0
+0b110000 
+
+# 0x0094: sw $s1, 8($sp)
+cbe10008 
+
+# 0x0098: lw $a0, 4($sp)
+a2e10004 
+
+# 0x009c: slt $t2, $s1, $a0 # t1 is digit, a0 is n
+78b02000 
+
+# 0x00a0: beq $t2, $zero, post_recursion
+d80100c0 
+
+# 0x00a4: nop
+00000000 
+
+# 0x00a8: li $a1, 10 # can be deleted later
+0301000a 
+
+# 0x00ac: jal quotient
+ff030108 
+
+# 0x00b0: nop
+00000000 
+
+# 0x00b4: addi $a0, $v0, 0
+02110000 
+
+# 0x00b8: jal print_number
+ff030060 
+
+# 0x00bc: nop
+00000000 
+
+# 0x00c0: lw $s1, 8($sp)
+abe10008 
+
+# 0x00c4: addi $t0, $s1, 0x30
+06b10030 
+
+# 0x00c8: sb $t0, 0($s0)
+b6a10000 
+
+# 0x00cc: lw $ra, 0($sp)
+afe10000 
+
+# 0x00d0: lw $a0, 4($sp)
+a2e10004 
+
+# 0x00d4: addi $sp, $sp, 12
+0ee1000c 
+
+# 0x00d8: jr $ra
+f000f000 
+
+# 0x00dc: nop
+00000000 
+
+# 0x00e0: slt $t0, $a0, $a1
+76203000 
+
+# 0x00e4: bne $t0, $zero, remainder_return
+e60100fc 
+
+# 0x00e8: nop
+00000000 
+
+# 0x00ec: sub $a0, $a0, $a1
+12203000 
+
+# 0x00f0: slt $t1, $a0, $a1
+77203000 
+
+# 0x00f4: beq $t1, $zero, remainder_while
+d70100ec 
+
+# 0x00f8: nop
+00000000 
+
+# 0x00fc: addi $v0, $a0, 0
+01210000 
+
+# 0x0100: jr $ra
+f000f000 
+
+# 0x0104: nop
+00000000 
+
+# 0x0108: li $t2, 0
+08010000 
+
+# 0x010c: slt $t0, $a0, $a1
+76203000 
+
+# 0x0110: bne $t0, $zero, quotient_return
+e601012c 
+
+# 0x0114: nop
+00000000 
+
+# 0x0118: sub $a0, $a0, $a1
+12203000 
+
+# 0x011c: addi $t2, $t2, 1
+08810001 
+
+# 0x0120: slt $t1, $a0, $a1
+77203000 
+
+# 0x0124: beq $t1, $zero, quotient_while
+d7010118 
+
+# 0x0128: nop
+00000000 
+
+# 0x012c: addi $v0, $t2, 0
+01810000 
+
+# 0x0130: jr $ra
+f000f000 
+
+# 0x0134: nop
+00000000 
