@@ -13,62 +13,68 @@ v2.0 raw
 # 0x000c: li $sp, STACK_TOP
 0e01f800 
 
-# 0x0010: lw $t0, 0($s1)
+# 0x0010: li $s2, STACK_TOP  # to implement queue, need a pointer at head to dequeue.
+0c01f800 
+
+# 0x0014: lw $t0, 0($s1)
 a6b10000 
 
-# 0x0014: beq $t0, $zero, loop_top
-d6010010 
+# 0x0018: beq $t0, $zero, loop_top
+d6010014 
 
-# 0x0018: sw $t0, 0($s0)
+# 0x001c: sw $t0, 0($s0)
 c6a10000 
 
-# 0x001c: li $t1, '\n'
+# 0x0020: li $t1, '\n'
 0701000a 
 
-# 0x0020: beq $t0, $t1, prom_process
-d6710030 
+# 0x0024: beq $t0, $t1, prom_process
+d6710034 
 
-# 0x0024: push $t0
-0ee1fffe c6e10000 
+# 0x0028: push $t0            # store into stack pointer pos
+0ee1fffc c6e10000 
 
-# 0x002c: j loop_top
-f0010010 
+# 0x0030: j loop_top
+f0010014 
 
-# 0x0030: li $t2, STACK_TOP
-0801f800 
+# 0x0034: beq $s2, $sp, end   # if $s2 moved down below $sp, then end program
+dce1006c 
 
-# 0x0034: beq $t2, $sp, end
-d8e1006c 
+# 0x0038: addi $s2, $s2, -4   # iterate through stack from top to where $sp is.
+0cc1fffc 
 
-# 0x0038: pop $t0
-a6e10000 0ee10002 
+# 0x003c: lw $t0, 0($s2)
+a6c10000 
 
 # 0x0040: li $t1, 97
 07010061 
 
-# 0x0044: bge! $t0, $t1, smaller
-76607000 d6010054 
+# 0x0044: ble! $t1, $t0, smaller
+77607000 d7010054 
 
-# 0x004c: sw $t0, 0($s0)
+# 0x004c: sw $t0, 0($s0)      # write the converted char to terminal
 c6a10000 
 
-# 0x0050: j prom_process
-f0010030 
+# 0x0050: j prom_process      # after which, we go back and continue down the stack
+f0010034 
 
 # 0x0054: li $t2, 122
 0801007a 
 
-# 0x0058: ble! $t0, $t2, beupper
-76806000 d6010064 
+# 0x0058: bge! $t2, $t0, beupper
+78806000 d8010064 
 
 # 0x0060: j continue
 f001004c 
 
-# 0x0064: addi $t0, $t0, -32
+# 0x0064: addi $t0, $t0, -32  # convert from lower to upper case here.
 0661ffe0 
 
 # 0x0068: j continue
 f001004c 
 
-# 0x006c: j HALT
+# 0x006c: li $sp, STACK_TOP
+0e01f800 
+
+# 0x0070: j HALT
 f001ff00 

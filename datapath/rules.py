@@ -172,12 +172,12 @@ def not_instr(destination, src):
 # push and pop
 @assembler.instruction('push #', 2) # <- notice the 2 here. This tells the assembler that we will emit two instructions for this rule
 def push_instr(reg):
-  return addi('$sp', '$sp', '-2') + store_word(reg, 0, '$sp')
+  return addi('$sp', '$sp', '-4') + store_word(reg, 0, '$sp')
 
 # pop
 @assembler.instruction('pop #', 2) # <- notice the 2 here. This tells the assembler that we will emit two instructions for this rule
 def pop_instr(reg):
-  return load_word(reg, 0, '$sp') + addi('$sp', '$sp', '2')
+  return load_word(reg, 0, '$sp') + addi('$sp', '$sp', '4')
 
 # blt branch less than
 @assembler.instruction('blt! #, #, #', 2)
